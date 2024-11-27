@@ -93,7 +93,7 @@ fun ItemList(items: List<String>) {
                     modifier = Modifier.weight(1f) //Para que se me quede en la derecha
                 )
                 Text(
-                    text = "${(10..99).random()} productos",
+                    text = "${(10..50).random()} productos",
                     fontSize = 16.sp
                 )
             }
