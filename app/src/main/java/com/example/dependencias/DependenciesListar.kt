@@ -1,12 +1,14 @@
 package com.example.dependencias
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Menu
@@ -27,10 +29,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+var List = mutableListOf<String>("Hola","Baby","UNO")
 
 @Composable
 @Preview
-fun DependenciesScreenPrincipal(modifier: Modifier=Modifier){
+fun DependenciesScreenPrincipalListar(modifier: Modifier=Modifier){
     DependenciesContentPrincipal(modifier)
 }
 
@@ -41,14 +44,21 @@ private fun DependenciesContentPrincipal(modifier: Modifier=Modifier)
     Column {
         HorizontalDivider()
         Row {
-            Spacer( modifier=modifier.size(20.dp))
+
             TopBarWithMenuIcon( )
         }
         HorizontalDivider()
         Box(
-            modifier = Modifier.fillMaxSize()
-        )
+            modifier = Modifier.fillMaxSize(),
+
+            )
         {
+            Box(
+                modifier.padding(vertical = 6.dp)
+            )
+            {
+                ItemList(List)
+            }
             FloatingActionButton(
                 onClick = { },
                 modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp),
@@ -62,6 +72,36 @@ private fun DependenciesContentPrincipal(modifier: Modifier=Modifier)
     }
 }
 
+@Composable
+fun ItemList(items: List<String>) {
+    LazyColumn(
+        modifier = Modifier.padding(horizontal = 16.dp)
+    ) {
+        items(items) { item ->
+            Row(
+                modifier = Modifier
+                    .border(
+                        width = 1.dp,
+                        color = Color.Black,
+                        shape = RoundedCornerShape(4.dp)
+                    )
+                    .padding(16.dp)
+            ) {
+                Text(
+                    text = item,
+                    fontSize = 16.sp,
+                    modifier = Modifier.weight(1f) //Para que se me quede en la derecha
+                )
+                Text(
+                    text = "${(10..99).random()} productos",
+                    fontSize = 16.sp
+                )
+            }
+        }
+    }
+}
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBarWithMenuIcon(modifier: Modifier=Modifier) {
@@ -69,13 +109,13 @@ fun TopBarWithMenuIcon(modifier: Modifier=Modifier) {
         title = {   Text(
             text = "Inventory",
             fontSize = 20.sp,
-            ) },
+        ) },
         navigationIcon = {
 
-                Icon(
-                    imageVector = Icons.Default.Menu,
-                    contentDescription = "Menú"
-                )
+            Icon(
+                imageVector = Icons.Default.Menu,
+                contentDescription = "Menú"
+            )
         },
         actions =
         {

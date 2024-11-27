@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             DependenciasTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    DependenciesScreenPrincipal(
+                    DependenciesScreenPrincipalListar(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
