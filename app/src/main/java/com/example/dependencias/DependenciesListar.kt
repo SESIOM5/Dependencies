@@ -47,7 +47,6 @@ private fun DependenciesContentPrincipal(modifier: Modifier=Modifier)
     Column {
         HorizontalDivider()
         Row {
-
             TopBarWithMenuIcon( )
         }
         HorizontalDivider()
